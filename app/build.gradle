@@ -1,0 +1,20 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation coreKtx
+    implementation dependsUI.appCompat
+    implementation dependsUI.designMaterial
+    implementation dependsUI.navigation
+
+    implementation dependsInjection.daggerHilt
+    kapt dependsInjection.daggerHiltCompiler
+
+    testImplementation dependsTesting.jUnit
+    androidTestImplementation dependsTesting.jUnitKtx
+    androidTestImplementation dependsTesting.espresso
+}
