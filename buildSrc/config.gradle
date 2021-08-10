@@ -18,7 +18,7 @@ subprojects {
                 compileSdkVersion versions.compileVersion
 
                 defaultConfig {
-                    applicationId "com.goplay.app"
+                    //applicationId "com.goplay.app"
                     minSdk versions.minSdkVersion
                     targetSdk versions.targetSdkVersion
                     versionCode versions.versionCode
@@ -43,6 +43,10 @@ subprojects {
                 buildFeatures {
                     dataBinding = true
                 }
+            }
+
+            dependencies {
+                implementation coreKtx
             }
         }
     }
