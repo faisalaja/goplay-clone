@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_host_fragment"
-    android:name="androidx.navigation.fragment.NavHostFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    app:defaultNavHost="true"
-    app:navGraph="@navigation/nav_graph" />
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isShowComponentView"
+            type="Boolean" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        style="@style/ContainerViewStyle"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar"
+            app:isShowToolbar="@{isShowComponentView}" />
+
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            style="@style/FullScreen"
+            android:layout_weight="1"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph"
+            tools:ignore="FragmentTagUsage" />
+
+        <include
+            layout="@layout/bottom_nav"
+            app:isShowBottomNav="@{isShowComponentView}" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

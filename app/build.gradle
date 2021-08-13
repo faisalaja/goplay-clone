@@ -7,14 +7,23 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
+    implementation project(':core')
+    implementation project(':navigation')
     implementation project(':commons:base_ui')
+    implementation project(':features:splash')
+    implementation project(':features:home')
 
     implementation dependsUI.appCompat
     implementation dependsUI.designMaterial
     implementation dependsUI.navigation
+    implementation dependsUI.constrainsLayout
 
     implementation dependsInjection.daggerHilt
     kapt dependsInjection.daggerHiltCompiler
+
+    implementation depensNetwork.retrofit
+    implementation depensNetwork.retrofitGson
+    implementation depensNetwork.loging
 
     testImplementation dependsTesting.jUnit
     androidTestImplementation dependsTesting.jUnitKtx

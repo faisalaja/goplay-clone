@@ -1,0 +1,16 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+dependencies {
+    implementation depensNetwork.retrofit
+    implementation depensNetwork.retrofitGson
+    implementation depensNetwork.loging
+
+    implementation dependsInjection.daggerHilt
+    kapt dependsInjection.daggerHiltCompiler
+}

@@ -1,3 +1,7 @@
 include ':app'
-include ':features:splash'
+include ':navigation'
 include ':commons:base_ui'
+include ':features:splash'
+include ':features:home'
+
+include ':core'

@@ -25,6 +25,11 @@ subprojects {
                     versionName versions.versionName
 
                     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                    vectorDrawables.useSupportLibrary = true
+
+                    buildConfigField("String", "API_KEY", api_key)
+                    buildConfigField("String", "BASE_URL", base_url)
+                    buildConfigField("String", "IMAGE_URL", image_url)
                 }
 
                 buildTypes {
@@ -46,7 +51,8 @@ subprojects {
             }
 
             dependencies {
-                implementation coreKtx
+                implementation depends.coreKtx
+                implementation depends.coroutine
             }
         }
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isShowToolbar"
+            type="Boolean" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="@{isShowToolbar ? View.VISIBLE : View.GONE, default=visible}">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/dark_500"
+            android:padding="14dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/toolbar_icon"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:layout_gravity="start"
+                android:src="@drawable/ic_logo_white"
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"
+                toools:text="@string/app_name" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <View style="@style/LineStyle" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

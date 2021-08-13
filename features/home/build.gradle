@@ -1,0 +1,26 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+dependencies {
+    implementation project(':commons:base_ui')
+    implementation project(':core')
+
+    implementation dependsUI.appCompat
+    implementation dependsUI.designMaterial
+    implementation dependsUI.constrainsLayout
+    implementation dependsUI.lifecycleLiveData
+    implementation dependsUI.lifecycleViewModel
+    implementation dependsUI.fragmentKTX
+
+    implementation depensImage.glide
+    implementation depensImage.glideCompiler
+
+    implementation dependsInjection.daggerHilt
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt dependsInjection.daggerHiltCompiler
+}

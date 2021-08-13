@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bannerUrl"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/FullScreen"
+        android:layout_margin="4dp"
+        android:clipToPadding="false"
+        android:elevation="2dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/FullScreen"
+            android:layout_weight="1"
+            android:src="@color/placeholder"
+            app:imageUrl="@{bannerUrl}" />
+    </androidx.cardview.widget.CardView>
+</layout>
