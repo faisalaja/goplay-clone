@@ -9,28 +9,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.goplay.core.network.data.model.result.MovieResponse
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.goplay.core.network.data.model.result.Movie
 import com.goplay.core.network.data.repository.RepositoryImpl
-import com.goplay.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(private val repositoryImpl: RepositoryImpl) : ViewModel() {
-    private val movieCollection: MutableLiveData<MutableList<Flow<Resource<MovieResponse>>>> =
+    private val movieCollection: MutableLiveData<MutableList<Flow<PagingData<Movie>>>> =
         MutableLiveData()
 
-    private val tvShowCollection: MutableLiveData<MutableList<Flow<Resource<MovieResponse>>>> =
+    private val tvShowCollection: MutableLiveData<MutableList<Flow<PagingData<Movie>>>> =
         MutableLiveData()
 
-    val movies: LiveData<MutableList<Flow<Resource<MovieResponse>>>>
+    val movies: LiveData<MutableList<Flow<PagingData<Movie>>>>
         get() = movieCollection
 
-    val tvShow: LiveData<MutableList<Flow<Resource<MovieResponse>>>>
+    val tvShow: LiveData<MutableList<Flow<PagingData<Movie>>>>
         get() = tvShowCollection
 
     init {
@@ -40,46 +39,27 @@ class MovieViewModel @Inject constructor(private val repositoryImpl: RepositoryI
 
     private fun getMovie() {
         viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                repositoryImpl.fetchMovies(NOW_PLAYING).let {
-                    movieCollection.postValue(mutableListOf(it))
-                }
-                repositoryImpl.fetchMovies(TOP_RATED).let {
-                    movieCollection.postValue(mutableListOf(it))
-                }
-                repositoryImpl.fetchMovies(UPCOMING).let {
-                    movieCollection.postValue(mutableListOf(it))
-                }
-                repositoryImpl.fetchMovies(POPULAR).let {
-                    movieCollection.postValue(mutableListOf(it))
-                }
-            }
+            val nowPlaying = repositoryImpl.fetchMovies(NOW_PLAYING).cachedIn(viewModelScope)
+            val topRate = repositoryImpl.fetchMovies(TOP_RATED).cachedIn(viewModelScope)
+            val upcoming = repositoryImpl.fetchMovies(UPCOMING).cachedIn(viewModelScope)
+            val popular = repositoryImpl.fetchMovies(POPULAR).cachedIn(viewModelScope)
+
+            val collections = mutableListOf(nowPlaying, topRate, upcoming, popular)
+            movieCollection.postValue(collections)
         }
     }
 
     private fun getTvShow() {
         viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                repositoryImpl.fetchTvShow(TvShowType.AIRING_TODAY).let {
-                    tvShowCollection.postValue(mutableListOf(it))
-                }
-            }
-            withContext(Dispatchers.Main) {
-                repositoryImpl.fetchTvShow(TvShowType.ON_THE_AIR).let {
-                    tvShowCollection.postValue(mutableListOf(it))
-                }
-            }
-            withContext(Dispatchers.Main) {
-                repositoryImpl.fetchTvShow(TvShowType.TOP_RATED).let {
-                    tvShowCollection.postValue(mutableListOf(it))
-                }
-            }
-            withContext(Dispatchers.Main) {
-                repositoryImpl.fetchTvShow(TvShowType.POPULAR).let {
-                    tvShowCollection.postValue(mutableListOf(it))
-                }
-            }
+            val airingToday = repositoryImpl.fetchTvShow(TvShowType.AIRING_TODAY)
+                .cachedIn(viewModelScope)
+            val onTheAir = repositoryImpl.fetchTvShow(TvShowType.ON_THE_AIR)
+                .cachedIn(viewModelScope)
+            val topRate = repositoryImpl.fetchTvShow(TvShowType.TOP_RATED).cachedIn(viewModelScope)
+            val popular = repositoryImpl.fetchTvShow(TvShowType.POPULAR).cachedIn(viewModelScope)
+
+            val collections = mutableListOf(airingToday, onTheAir, topRate, popular)
+            tvShowCollection.postValue(collections)
         }
     }
-
 }

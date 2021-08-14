@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.2484375" />
+        <entry key="../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_list_item_1.xml" value="0.27794871794871795" />
         <entry key="app/src/main/res/drawable/bottom_nav_selector.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1995" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16951788491446346" />
@@ -30,9 +31,10 @@
         <entry key="features/home/src/main/res/drawable/image_broken.xml" value="0.154" />
         <entry key="features/home/src/main/res/drawable/image_placeholder.xml" value="0.154" />
         <entry key="features/home/src/main/res/drawable/rounded_bg.xml" value="0.1675" />
-        <entry key="features/home/src/main/res/layout/home_fragment.xml" value="0.28229166666666666" />
+        <entry key="features/home/src/main/res/layout/home_fragment.xml" value="0.24262295081967214" />
         <entry key="features/home/src/main/res/layout/item_banner.xml" value="0.27794871794871795" />
-        <entry key="features/home/src/main/res/layout/item_categories.xml" value="0.165" />
+        <entry key="features/home/src/main/res/layout/item_categories.xml" value="0.25" />
+        <entry key="features/home/src/main/res/layout/item_categories_placeholder.xml" value="0.25" />
         <entry key="features/home/src/main/res/layout/item_head.xml" value="0.335" />
         <entry key="features/home/src/main/res/layout/item_poster.xml" value="0.28229166666666666" />
         <entry key="features/home/src/main/res/layout/item_rectangle_rounded.xml" value="0.1" />
@@ -40,6 +42,7 @@
         <entry key="features/home/src/main/res/layout/item_recylerview.xml" value="0.1287037037037037" />
         <entry key="features/home/src/main/res/layout/item_retangle_rounded.xml" value="0.25" />
         <entry key="features/home/src/main/res/layout/movie_fragment.xml" value="0.2011070110701107" />
+        <entry key="features/home/src/main/res/layout/page_main_fragment.xml" value="0.24262295081967214" />
         <entry key="features/home/src/main/res/layout/toolbar.xml" value="0.28229166666666666" />
         <entry key="features/splash/src/main/res/layout/splash_fragment.xml" value="0.25" />
       </map>

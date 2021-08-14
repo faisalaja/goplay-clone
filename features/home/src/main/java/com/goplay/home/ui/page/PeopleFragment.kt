@@ -1,7 +1,6 @@
 package com.goplay.home.ui.page
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.goplay.core.utils.Status
 import com.goplay.home.R
 import com.goplay.home.databinding.PageMainFragmentBinding
 import com.goplay.home.ui.adapter.PeopleAdapter
 import com.goplay.home.ui.viewmodel.PeopleViewModel
 import com.goplay.home.utils.ItemListDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -54,18 +51,8 @@ class PeopleFragment : Fragment() {
     private fun setupObserver() {
         peopleViewModel.peoplePopular.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
-                it.collect { resource ->
-                    delay(300)
-                    when (resource.status) {
-                        Status.LOADING -> {
-                        }
-                        Status.SUCCESS -> {
-                            Log.d("TAG", "setupObserver: ${resource.data?.people}")
-                            peopleAdapter.people = resource.data?.people
-                        }
-                        Status.ERROR -> {
-                        }
-                    }
+                it.collect { pagingData ->
+                    peopleAdapter.submitData(lifecycle, pagingData)
                 }
             }
         }
@@ -85,5 +72,4 @@ class PeopleFragment : Fragment() {
             addItemDecoration(itemListDecoration)
         }
     }
-
 }

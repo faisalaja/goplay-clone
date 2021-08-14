@@ -1,11 +1,16 @@
 package com.goplay.core.network.data.repository
 
+import Constants.MOVIE
+import Constants.TV
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.goplay.core.network.data.model.result.Movie
-import com.goplay.core.network.data.model.result.MovieResponse
 import com.goplay.core.network.data.model.result.People
-import com.goplay.core.network.data.model.result.PeopleResponse
+import com.goplay.core.network.data.source.PagingMovieDataSource
+import com.goplay.core.network.data.source.PagingPeopleDataSource
 import com.goplay.core.network.service.ApiServices
 import com.goplay.core.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -19,12 +24,26 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val services: ApiServices) : Repository {
 
-    override suspend fun fetchMovies(type: String): Flow<Resource<MovieResponse>> {
-        return handleRequestMovie(services.getMovies(type))
+    override suspend fun fetchMovies(type: String): Flow<PagingData<Movie>> {
+        return Pager(config = PagingConfig(10, enablePlaceholders = false),
+            pagingSourceFactory = {
+                PagingMovieDataSource(
+                    services = services,
+                    api_type = MOVIE,
+                    type = type
+                )
+            }).flow
     }
 
-    override suspend fun fetchTvShow(type: String): Flow<Resource<MovieResponse>> {
-        return handleRequestMovie(services.getTvShow(type))
+    override suspend fun fetchTvShow(type: String): Flow<PagingData<Movie>> {
+        return Pager(config = PagingConfig(10, enablePlaceholders = false),
+            pagingSourceFactory = {
+                PagingMovieDataSource(
+                    services = services,
+                    api_type = TV,
+                    type = type
+                )
+            }).flow
     }
 
     override suspend fun fetchDetailMovie(
@@ -48,8 +67,14 @@ class RepositoryImpl @Inject constructor(private val services: ApiServices) : Re
         return result
     }
 
-    override suspend fun fetchPeople(type: String): Flow<Resource<PeopleResponse>> {
-        return handleRequestMovie(services.getPerson(type))
+    override suspend fun fetchPeople(type: String): Flow<PagingData<People>> {
+        return Pager(config = PagingConfig(10, enablePlaceholders = false),
+            pagingSourceFactory = {
+                PagingPeopleDataSource(
+                    services = services,
+                    type = type
+                )
+            }).flow
     }
 
     override suspend fun fetchDetailPeople(): LiveData<Resource<People>> {

@@ -1,15 +1,12 @@
 object Constants {
-    private const val API_VERSION = "3"
+    const val API_VERSION = "3"
     const val DEFAULT_LANGUAGE = "en-US"
 
-    private const val MOVIE = "movie"
-    private const val TV = "tv"
+    const val MOVIE = "movie"
+    const val TV = "tv"
 
     const val SEARCH = "$API_VERSION/search"
     const val PERSON = "$API_VERSION/person"
-
-    const val API_MOVIES = "$API_VERSION/$MOVIE"
-    const val API_TV = "$API_VERSION/$TV"
 }
 
 object Type {

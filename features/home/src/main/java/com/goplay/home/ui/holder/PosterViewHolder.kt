@@ -20,9 +20,9 @@ class PosterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val binding = ItemPosterBinding.bind(itemView)
 
-    fun bind(movie: Movie) {
-        binding.posterUrl = if (!movie.posterPath.isNullOrEmpty()) {
-            movie.posterPath
+    fun bind(item: Movie) {
+        binding.posterUrl = if (!item.posterPath.isNullOrEmpty()) {
+            item.posterPath
         } else ""
 
     }

@@ -18,9 +18,7 @@ class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    private val binding = ItemCategoriesBinding.bind(itemView)
-
-    val itemRecyclerView = binding.categoryListItem.rvMain
+    val binding = ItemCategoriesBinding.bind(itemView)
 
     fun bind(data: Categories?) {
         binding.categoryTitle = data?.title.orEmpty()

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,60 +12,75 @@
         <variable
             name="categoryDescription"
             type="String" />
+
+
+        <import type="android.view.View" />
+
+        <variable
+            name="showLoading"
+            type="Boolean" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/item_categories_placeholder"
+            android:visibility="@{showLoading? View.VISIBLE: View.GONE,default = gone}" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:visibility="@{showLoading? View.GONE: View.VISIBLE,default = invisible}">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:inputType="textCapWords"
+                    android:text="@{categoryTitle}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/category_action_show_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_chip"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="@string/btn_title_see_all"
+                    android:textAllCaps="false"
+                    android:textColor="@color/pink"
+                    android:textSize="12sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:inputType="textCapWords"
-                android:text="@{categoryTitle}"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:text="@{categoryDescription}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/category_action_show_all"
-                android:layout_width="wrap_content"
+            <include
+                android:id="@+id/category_list_item"
+                layout="@layout/item_recycler_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_chip"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="See all"
-                android:textAllCaps="false"
-                android:textColor="@color/pink"
-                android:textSize="12sp" />
+                android:layout_marginTop="8dp" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{categoryDescription}"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:visibility="gone" />
-
-        <include
-            android:id="@+id/category_list_item"
-            layout="@layout/item_recycler_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
 </layout>

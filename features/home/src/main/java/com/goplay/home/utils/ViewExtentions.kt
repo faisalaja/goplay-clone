@@ -33,7 +33,7 @@ fun ImageView.loadCircleImage(url: String) {
         .into(this)
 }
 
-fun capitalize(str: String, type: String): String {
+fun capitalize(str: String, type: String? = null): String {
     val capBuffer = StringBuffer()
     val capMatcher: Matcher = Pattern.compile(
         "([a-z])([a-z]*)",

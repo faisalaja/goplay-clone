@@ -3,4 +3,5 @@
     <string name="title_movie">Movie</string>
     <string name="title_tv_show">Tv Show</string>
     <string name="title_people">People</string>
+    <string name="btn_title_see_all">See all</string>
 </resources>

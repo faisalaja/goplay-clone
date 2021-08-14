@@ -1,18 +1,16 @@
 package com.goplay.home.ui.viewmodel
 
 import Type
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.goplay.core.network.data.model.result.PeopleResponse
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.goplay.core.network.data.model.result.People
 import com.goplay.core.network.data.repository.RepositoryImpl
-import com.goplay.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,22 +18,19 @@ class PeopleViewModel @Inject constructor(
     private val repositoryImpl: RepositoryImpl
 ) : ViewModel() {
 
-    private val _peoplePopular: MutableLiveData<Flow<Resource<PeopleResponse>>> = MutableLiveData()
+    private val _peoplePopular: MutableLiveData<Flow<PagingData<People>>> = MutableLiveData()
 
-    val peoplePopular: LiveData<Flow<Resource<PeopleResponse>>>
+    val peoplePopular: MutableLiveData<Flow<PagingData<People>>>
         get() = _peoplePopular
 
     init {
         fetchPopularPeople()
     }
 
-    private fun fetchPopularPeople() {
+    private fun fetchPopularPeople(type: String = Type.POPULAR) {
         viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                repositoryImpl.fetchPeople(Type.POPULAR).let {
-                    _peoplePopular.postValue(it)
-                }
-            }
+            val peoplePopular = repositoryImpl.fetchPeople(type).cachedIn(viewModelScope)
+            _peoplePopular.postValue(peoplePopular)
         }
     }
 }

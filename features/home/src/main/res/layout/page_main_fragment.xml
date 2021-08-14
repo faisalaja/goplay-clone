@@ -8,28 +8,9 @@
             type="String" />
 
         <import type="android.view.View" />
-
-        <variable
-            name="showLoading"
-            type="Boolean" />
     </data>
 
     <FrameLayout style="@style/ContainerViewStyle">
-
-        <ProgressBar
-            style="@android:style/Widget.ProgressBar.Inverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/pink"
-            android:indeterminateTintMode="src_atop"
-            android:visibility="@{showLoading? View.VISIBLE: View.GONE,default = gone}" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{title}" />
 
         <include android:id="@+id/rv_container" layout="@layout/item_recycler_view"/>
     </FrameLayout>

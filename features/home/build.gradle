@@ -16,6 +16,7 @@ dependencies {
     implementation dependsUI.lifecycleLiveData
     implementation dependsUI.lifecycleViewModel
     implementation dependsUI.fragmentKTX
+    implementation dependsUI.paging
 
     implementation depensImage.glide
     implementation depensImage.glideCompiler
